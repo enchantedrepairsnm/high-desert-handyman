@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Desert Handyman Services | Albuquerque & East Mountains</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: {
+                            DEFAULT: '#C85A32',
+                            light: '#E27D56',
+                            dark: '#9E3C1B'
+                        },
+                        turquoise: {
+                            DEFAULT: '#2A9D8F',
+                            light: '#48CAE4',
+                            dark: '#1E6F65'
+                        },
+                        sand: {
+                            DEFAULT: '#F5EBE0',
+                            light: '#FAF5EF',
+                            dark: '#E8D8C8'
+                        },
+                        slate: {
+                            850: '#1e293b',
+                            900: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAF5EF;
+            color: #1e293b;
+        }
+        /* Custom image comparison slider styles */
+        .comparison-container {
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+        }
+        .img-before-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+            z-index: 10;
+        }
+        .comparison-slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: #2A9D8F;
+            z-index: 20;
+            cursor: ew-resize;
+            transform: translateX(-50%);
+        }
+        .handle-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #2A9D8F;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 text-white transition-all shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand / Logo -->
+                <a href="#" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-terracotta flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        <i class="fa-solid font-bold fa-hammer"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-white block leading-tight">High Desert</span>
+                        <span class="text-xs uppercase tracking-widest text-turquoise font-semibold block">Handyman Services</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#services" class="hover:text-turquoise transition-colors">Services</a>
+                    <a href="#compliance" class="hover:text-turquoise transition-colors">Licensing Info</a>
+                    <a href="#portfolio" class="hover:text-turquoise transition-colors">Portfolio</a>
+                    <a href="#estimator" class="hover:text-turquoise transition-colors">Estimate Tool</a>
+                    <a href="#reviews" class="hover:text-turquoise transition-colors">Client Reviews</a>
+                    <a href="#contact" class="hover:text-turquoise transition-colors">Contact</a>
+                </nav>
+
+                <!-- Header Call Actions -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="tel:5053634149" class="flex items-center gap-2 text-sm font-semibold text-sand-light hover:text-turquoise transition">
+                        <i class="fa-solid fa-phone text-terracotta"></i> (505) 363-4149
+                    </a>
+                    <a href="#contact" class="bg-terracotta hover:bg-terracotta-dark text-white px-4 py-2.5 rounded-lg font-semibold text-sm transition duration-200 shadow-md">
+                        Get Free Quote
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-slate-300 hover:text-white focus:outline-none p-2 rounded-md" aria-label="Toggle menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile dropdown menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#services" class="block text-slate-300 hover:text-turquoise py-1 text-base">Services</a>
+            <a href="#compliance" class="block text-slate-300 hover:text-turquoise py-1 text-base">Licensing Info</a>
+            <a href="#portfolio" class="block text-slate-300 hover:text-turquoise py-1 text-base">Portfolio</a>
+            <a href="#estimator" class="block text-slate-300 hover:text-turquoise py-1 text-base">Estimate Tool</a>
+            <a href="#reviews" class="block text-slate-300 hover:text-turquoise py-1 text-base">Client Reviews</a>
+            <a href="#contact" class="block text-slate-300 hover:text-turquoise py-1 text-base">Contact</a>
+            <div class="pt-2 border-t border-slate-800 flex flex-col gap-2">
+                <a href="tel:5053634149" class="flex items-center justify-center gap-2 py-2 text-sand-light font-semibold bg-slate-800 rounded-lg">
+                    <i class="fa-solid fa-phone text-terracotta"></i> (505) 363-4149
+                </a>
+                <a href="mailto:highdesertrepairs@gmail.com" class="flex items-center justify-center gap-2 py-2 text-white font-semibold bg-terracotta rounded-lg">
+                    <i class="fa-solid fa-envelope"></i> highdesertrepairs@gmail.com
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative bg-slate-900 text-white min-h-screen flex items-center justify-center pt-20 pb-16 overflow-hidden">
+        <!-- Hero Background Image with Gradient Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="autumn colors.jpg" alt="Autumn Colors High Desert Landscape" class="w-full h-full object-cover object-center" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/8B4513/FFFFFF?text=High+Desert+Landscape';">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/80 to-slate-950/85"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/60"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-amber-500/20 backdrop-blur-md border border-amber-500/40 px-3 py-1.5 rounded-full text-amber-300 text-xs sm:text-sm font-medium">
+                        <i class="fas fa-shield-alt text-amber-400"></i>
+                        <span>Licensed & Trusted Local Specialist</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                        High Desert <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-teal-300">Handyman Services</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-200 max-w-2xl leading-relaxed">
+                        Local, reliable home repair & maintenance serving Albuquerque and the East Mountains area. Craftsmanship built on integrity, attention to detail, and dependable communication.
+                    </p>
+
+                    <!-- Fast Contact CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-2 justify-center sm:justify-start">
+                        <a href="tel:5053634149" class="inline-flex items-center justify-center px-6 py-3.5 border border-transparent text-base font-semibold rounded-xl text-slate-900 bg-amber-400 hover:bg-amber-300 shadow-lg hover:shadow-amber-500/20 transition duration-200">
+                            <i class="fas fa-phone-alt mr-2 text-slate-900"></i>
+                            Call / Text 505-363-4149
+                        </a>
+                        <a href="mailto:highdesertrepairs@gmail.com" class="inline-flex items-center justify-center px-6 py-3.5 border border-slate-600/80 text-base font-semibold rounded-xl text-white bg-slate-800/80 backdrop-blur-sm hover:bg-slate-700/90 border-teal-500/30 transition duration-200">
+                            <i class="fas fa-envelope mr-2 text-teal-400"></i>
+                            Email Us
+                        </a>
+                    </div>
+
+                    <!-- Highlights Badge Row -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-6 text-xs sm:text-sm text-slate-300">
+                        <div class="flex items-center space-x-2 bg-slate-900/60 backdrop-blur-sm p-2.5 rounded-lg border border-slate-800">
+                            <i class="fas fa-check-circle text-teal-400"></i>
+                            <span>Free Local Estimates</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-slate-900/60 backdrop-blur-sm p-2.5 rounded-lg border border-slate-800">
+                            <i class="fas fa-check-circle text-teal-400"></i>
+                            <span>East Mountains & ABQ</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-slate-900/60 backdrop-blur-sm p-2.5 rounded-lg border border-slate-800 col-span-2 sm:col-span-1">
+                            <i class="fas fa-check-circle text-teal-400"></i>
+                            <span>Light Commercial Repairs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Contact Card in Hero -->
+                <div class="lg:col-span-5">
+                    <div class="bg-slate-900/85 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-slate-700/60 shadow-2xl space-y-5">
+                        <div class="border-b border-slate-800 pb-4">
+                            <h3 class="text-xl font-bold text-white flex items-center">
+                                <i class="fas fa-tools text-amber-400 mr-2.5"></i> Request a Fast Response
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">Get in touch directly or use our quote estimator below.</p>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <a href="tel:5053634149" class="flex items-center p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/50 transition">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center mr-3 text-lg">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Phone / Text Direct</div>
+                                    <div class="font-bold text-white text-base">505-363-4149</div>
+                                </div>
+                            </a>
+
+                            <a href="mailto:highdesertrepairs@gmail.com" class="flex items-center p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/50 transition">
+                                <div class="w-10 h-10 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center mr-3 text-lg">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <div class="text-xs text-slate-400">Email Inquiries</div>
+                                    <div class="font-bold text-white text-sm sm:text-base truncate">highdesertrepairs@gmail.com</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <a href="#estimator" class="w-full inline-block text-center bg-teal-600 hover:bg-teal-500 text-white font-semibold py-3 px-4 rounded-xl transition duration-200">
+                            <i class="fas fa-calculator mr-2"></i> Try Ballpark Calculator
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NM Handyman Compliance Banner -->
+    <section id="compliance" class="bg-sand-dark/40 border-y border-sand-dark py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center gap-4 bg-white p-5 rounded-2xl border border-sand-dark/60 shadow-sm">
+                <div class="p-3 bg-terracotta/10 text-terracotta rounded-xl shrink-0 text-xl">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="text-base font-bold text-slate-900">New Mexico Handyman Operations & Compliance</h4>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        High Desert Handyman Services operates in full alignment with New Mexico handyman scope regulations. Services are focused on minor maintenance, small home repairs, non-structural framing modifications, light commercial assembly/fixtures, wood trim, tile repair, and subfloor patching (under the state general contractor threshold). For full major construction, structural builds, or licensed trade-restricted work (heavy electrical/plumbing), referrals are available upon request.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 sm:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-turquoise uppercase tracking-widest mb-2">What We Do Best</h2>
+                <h3 class="text-3xl font-extrabold text-slate-900">Craftsmanship & Handyman Solutions</h3>
+                <p class="text-slate-600 mt-3 text-base">From small homeowner repairs to light commercial feature installations, Justin brings precise attention to detail to every job.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-terracotta/10 rounded-xl flex items-center justify-center text-terracotta text-xl mb-5">
+                        <i class="fa-solid fa-bath"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-2">Subfloors & Bathroom Prep</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Subfloor moisture replacement, recessed floor prep, waterproofing backer board installation, and base tile prep work to fix rotted floors properly before finish materials.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-1.5 border-t border-slate-100 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Subfloor moisture repair</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Recessed subfloor leveling</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Waterproof membrane installation</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-turquoise/10 rounded-xl flex items-center justify-center text-turquoise text-xl mb-5">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-2">Light Commercial Maintenance</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Assembly, counter fascia trim, custom service bar wood wraps, retail fixtures, shelving, and accent features (as showcased in our Boba shop work).
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-1.5 border-t border-slate-100 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Service counter wood trim & cladding</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Commercial shelving & display mounting</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Interior touch-ups & hardware</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-600 text-xl mb-5">
+                        <i class="fa-solid fa-stairs"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-2">Exterior Decks & Stairs</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Deck board repair, outdoor wooden stair rebuilds, handrail reinforcement, sanding, and staining to keep mountain and desert homes safe and weather-ready.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-1.5 border-t border-slate-100 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Exterior step stringer & tread repair</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Deck board replacements & sealing</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Secure handrail installation</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-600 text-xl mb-5">
+                        <i class="fa-solid fa-[#000] fa-paint-roller"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-2">Interior Trim & Finish Carpentry</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Baseboards, door trim casing, accent wood walls, custom built-ins, bar tops, and finish woodwork to elevate living spaces with precision cuts.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-1.5 border-t border-slate-100 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Custom wood bar caps & counters</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Casing, trim & baseboards</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Cabinet adjustments & repair</li>
+                    </ul>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-600 text-xl mb-5">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-2">General Home Maintenance</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Drywall patching, door hanging/adjustments, light fixture replacements, hardware upgrades, fence repairs, and general honey-do lists.
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-1.5 border-t border-slate-100 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Drywall holes & tape repairs</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Door alignment & hardware swaps</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-turquoise"></i> Weatherproofing & sealing</li>
+                    </ul>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-terracotta-light/10 rounded-xl flex items-center justify-center text-terracotta text-xl mb-5">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">Local Service Coverage</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Prompt service tailored for both mountain environment demands and Albuquerque city residence needs.
+                        </p>
+                    </div>
+                    <div class="p-3 bg-sand rounded-xl border border-sand-dark/50 text-xs text-slate-700 font-medium">
+                        <p class="font-bold mb-1 text-terracotta-dark">Service Locations:</p>
+                        Albuquerque • Tijeras • Edgewood • Cedar Crest • Sandia Park • Moriarty
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 sm:py-20 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-turquoise uppercase tracking-widest mb-2">Real Job Proof</h2>
+                <h3 class="text-3xl font-extrabold text-white">Interactive Work Showcase</h3>
+                <p class="text-slate-400 mt-3 text-base">Drag the sliders on our before/after comparisons and click through bathroom progression stages to see Justin's actual workmanship.</p>
+            </div>
+
+            <!-- Portfolio Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button onclick="switchPortfolioTab('bar')" id="tab-bar" class="portfolio-tab px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-terracotta text-white shadow">
+                    Bar Transformation
+                </button>
+                <button onclick="switchPortfolioTab('bathroom')" id="tab-bathroom" class="portfolio-tab px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-slate-800 text-slate-300 hover:text-white">
+                    Bathroom Subfloor & Tile Stage
+                </button>
+                <button onclick="switchPortfolioTab('boba')" id="tab-boba" class="portfolio-tab px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-slate-800 text-slate-300 hover:text-white">
+                    Boba Shop Interior Woodwork
+                </button>
+                <button onclick="switchPortfolioTab('stairs')" id="tab-stairs" class="portfolio-tab px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-slate-800 text-slate-300 hover:text-white">
+                    Exterior Stairs
+                </button>
+            </div>
+
+            <!-- Portfolio Item 1: BAR (Interactive Before/After Slider) -->
+            <div id="content-bar" class="portfolio-content space-y-6">
+                <div class="bg-slate-850 p-6 rounded-2xl border border-slate-700">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Bar Custom Finish & Remodel</h4>
+                                <p class="text-xs text-slate-400">Drag the handle left/right to compare BEFORE vs AFTER</p>
+                            </div>
+                            <span class="text-xs bg-terracotta/20 text-terracotta-light border border-terracotta/30 px-3 py-1 rounded-full font-medium">Custom Woodwork & Finish</span>
+                        </div>
+
+                        <!-- Before / After Slider Box -->
+                        <div class="comparison-container w-full h-[350px] sm:h-[480px] rounded-xl overflow-hidden shadow-2xl relative" id="bar-slider">
+                            <!-- After Image (Background) -->
+                            <img src="bar after.jpg" alt="Bar after work" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://placehold.co/800x600/1e293b/FFFFFF?text=bar+after.jpg'">
+                            
+                            <!-- Before Image (Overlay) -->
+                            <div class="img-before-wrapper" id="bar-before-wrap">
+                                <img src="bar before.jpg" alt="Bar before work" class="absolute inset-0 w-full h-full object-cover max-w-none" id="bar-before-img" onerror="this.src='https://placehold.co/800x600/334155/FFFFFF?text=bar+before.jpg'">
+                            </div>
+
+                            <!-- Slider Handle -->
+                            <div class="comparison-slider-handle" id="bar-handle">
+                                <div class="handle-circle">
+                                    <i class="fa-solid fa-arrows-left-right text-xs"></i>
+                                </div>
+                            </div>
+
+                            <!-- Badges -->
+                            <span class="absolute top-4 left-4 bg-black/70 text-white text-xs px-2.5 py-1 rounded-md font-bold z-20 backdrop-blur">BEFORE</span>
+                            <span class="absolute top-4 right-4 bg-terracotta text-white text-xs px-2.5 py-1 rounded-md font-bold z-20 backdrop-blur">AFTER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 2: BATHROOM (Multi-Stage View) -->
+            <div id="content-bathroom" class="portfolio-content hidden space-y-6">
+                <div class="bg-slate-850 p-6 rounded-2xl border border-slate-700">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="mb-6">
+                            <h4 class="text-xl font-bold text-white mb-1">Bathroom Restoration & Waterproofing Stages</h4>
+                            <p class="text-sm text-slate-400">Click a stage below to view the thorough repair process step-by-step:</p>
+                        </div>
+
+                        <!-- Stage Selectors -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+                            <button onclick="setBathroomStage('before')" id="stage-btn-before" class="bath-stage-btn p-3 rounded-lg border text-left transition bg-terracotta border-terracotta text-white">
+                                <span class="block text-xs uppercase opacity-75 font-bold">Stage 1</span>
+                                <span class="font-bold text-sm">Initial State</span>
+                            </button>
+                            <button onclick="setBathroomStage('subfloor')" id="stage-btn-subfloor" class="bath-stage-btn p-3 rounded-lg border border-slate-700 bg-slate-800 text-slate-300 hover:text-white text-left transition">
+                                <span class="block text-xs uppercase opacity-75 font-bold">Stage 2</span>
+                                <span class="font-bold text-sm">Recessed Subfloor</span>
+                            </button>
+                            <button onclick="setBathroomStage('waterproofing')" id="stage-btn-waterproofing" class="bath-stage-btn p-3 rounded-lg border border-slate-700 bg-slate-800 text-slate-300 hover:text-left text-left transition">
+                                <span class="block text-xs uppercase opacity-75 font-bold">Stage 3</span>
+                                <span class="font-bold text-sm">Waterproofing</span>
+                            </button>
+                            <button onclick="setBathroomStage('final')" id="stage-btn-final" class="bath-stage-btn p-3 rounded-lg border border-slate-700 bg-slate-800 text-slate-300 hover:text-white text-left transition">
+                                <span class="block text-xs uppercase opacity-75 font-bold">Stage 4</span>
+                                <span class="font-bold text-sm">Completed Finish</span>
+                            </button>
+                        </div>
+
+                        <!-- Stage Image Display -->
+                        <div class="relative h-[350px] sm:h-[480px] rounded-xl overflow-hidden border border-slate-700 shadow-xl bg-slate-900">
+                            <img id="bath-display-img" src="bathroom before.jpg" alt="Bathroom Stage Image" class="w-full h-full object-cover transition-all duration-300" onerror="this.src='https://placehold.co/800x600/0f172a/FFFFFF?text=bathroom+before.jpg'">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6">
+                                <p id="bath-stage-desc" class="text-sm sm:text-base font-semibold text-sand">Stage 1: Demo and assessing damaged area prior to subfloor reconstruction.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 3: BOBA SHOP (Light Commercial Woodwork Gallery) -->
+            <div id="content-boba" class="portfolio-content hidden space-y-6">
+                <div class="bg-slate-850 p-6 rounded-2xl border border-slate-700">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="mb-6">
+                            <h4 class="text-xl font-bold text-white mb-1">Commercial Interior Handyman Work - Boba Shop</h4>
+                            <p class="text-sm text-slate-400">Custom service counter front cladding, trim alignment, and wood interior accents for local shop.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-3">
+                                <div class="h-[320px] rounded-xl overflow-hidden border border-slate-700 shadow-md">
+                                    <img src="boba looking in.jpg" alt="Boba Shop looking in" class="w-full h-full object-cover hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/600x450/1e293b/FFFFFF?text=boba+looking+in.jpg'">
+                                </div>
+                                <p class="text-xs text-slate-300 bg-slate-800 p-3 rounded-lg border border-slate-700">
+                                    <strong class="text-turquoise">Front Entrance View:</strong> Precision counter woodwork casing, custom horizontal bar fronting, and seamless corner joints.
+                                </p>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="h-[320px] rounded-xl overflow-hidden border border-slate-700 shadow-md">
+                                    <img src="boba looking left.jpg" alt="Boba Shop looking left" class="w-full h-full object-cover hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/600x450/1e293b/FFFFFF?text=boba+looking+left.jpg'">
+                                </div>
+                                <p class="text-xs text-slate-300 bg-slate-800 p-3 rounded-lg border border-slate-700">
+                                    <strong class="text-turquoise">Side View Details:</strong> Sturdy counter wrap installation, trim work, and customized interior commercial woodwork fitting.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 4: STAIRS (Interactive Before/After Slider) -->
+            <div id="content-stairs" class="portfolio-content hidden space-y-6">
+                <div class="bg-slate-850 p-6 rounded-2xl border border-slate-700">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Exterior Wooden Stair Repair & Rebuild</h4>
+                                <p class="text-xs text-slate-400">Drag slider left/right to compare initial weather-damaged steps vs new rebuild</p>
+                            </div>
+                            <span class="text-xs bg-turquoise/20 text-turquoise-light border border-turquoise/30 px-3 py-1 rounded-full font-medium">Exterior Carpenter Work</span>
+                        </div>
+
+                        <!-- Before / After Slider Box -->
+                        <div class="comparison-container w-full h-[350px] sm:h-[480px] rounded-xl overflow-hidden shadow-2xl relative" id="stairs-slider">
+                            <!-- After Image (Background) -->
+                            <img src="stairs after.jpg" alt="Stairs after rebuild" class="absolute inset-0 w-full h-full object-cover" onerror="this.src='https://placehold.co/800x600/1e293b/FFFFFF?text=stairs+after.jpg'">
+                            
+                            <!-- Before Image (Overlay) -->
+                            <div class="img-before-wrapper" id="stairs-before-wrap">
+                                <img src="stairs before.jpg" alt="Stairs before rebuild" class="absolute inset-0 w-full h-full object-cover max-w-none" id="stairs-before-img" onerror="this.src='https://placehold.co/800x600/334155/FFFFFF?text=stairs+before.jpg'">
+                            </div>
+
+                            <!-- Slider Handle -->
+                            <div class="comparison-slider-handle" id="stairs-handle">
+                                <div class="handle-circle">
+                                    <i class="fa-solid fa-arrows-left-right text-xs"></i>
+                                </div>
+                            </div>
+
+                            <!-- Badges -->
+                            <span class="absolute top-4 left-4 bg-black/70 text-white text-xs px-2.5 py-1 rounded-md font-bold z-20 backdrop-blur">BEFORE</span>
+                            <span class="absolute top-4 right-4 bg-terracotta text-white text-xs px-2.5 py-1 rounded-md font-bold z-20 backdrop-blur">AFTER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Estimator Section -->
+    <section id="estimator" class="py-16 sm:py-20 bg-sand/60 border-t border-sand-dark">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-xs font-bold text-terracotta uppercase tracking-widest mb-2">Instant Planning Tool</h2>
+                <h3 class="text-3xl font-extrabold text-slate-900">Project Cost Estimator</h3>
+                <p class="text-slate-600 mt-2 text-sm">Get an approximate ballpark range for budgeting. All final quotes are given after a direct photo review or on-site consultation.</p>
+            </div>
+
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-sand-dark shadow-md space-y-6">
+                <!-- Select Service Type -->
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-2">1. Select Repair or Project Category</label>
+                    <select id="est-type" onchange="calculateEstimate()" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 font-semibold text-slate-800 text-sm focus:ring-2 focus:ring-turquoise focus:outline-none">
+                        <option value="minor">Small Home Repair / Maintenance (Doors, drywall patch, fixtures)</option>
+                        <option value="subfloor">Subfloor Patching & Bathroom Prep</option>
+                        <option value="trim">Finish Carpentry / Baseboards / Wood Accent Cladding</option>
+                        <option value="stairs">Exterior Stair / Deck Board Repair</option>
+                        <option value="commercial">Light Commercial Fixtures / Service Counter Trim</option>
+                    </select>
+                </div>
+
+                <!-- Scope / Hours slider -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="text-xs font-bold uppercase text-slate-700">2. Estimated Scope / Complexity</label>
+                        <span id="est-hours-val" class="text-sm font-bold text-terracotta">Medium (Half-Day Project ~4 hrs)</span>
+                    </div>
+                    <input type="range" id="est-hours" min="1" max="12" step="1" value="4" oninput="calculateEstimate()" class="w-full accent-terracotta cursor-pointer">
+                    <div class="flex justify-between text-[11px] text-slate-500 mt-1">
+                        <span>Quick Fix (1-2 hrs)</span>
+                        <span>Half Day (4 hrs)</span>
+                        <span>Full Day / Multi-Step (8-12 hrs)</span>
+                    </div>
+                </div>
+
+                <!-- Calculated Output Box -->
+                <div class="bg-slate-900 text-white p-6 rounded-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs text-slate-400 block uppercase font-medium">Estimated Ballpark Range</span>
+                        <div id="est-total" class="text-3xl font-black text-turquoise-light">$220 - $320</div>
+                        <span class="text-[11px] text-slate-400">Includes standard labor estimator base (materials calculated separately)</span>
+                    </div>
+                    <button onclick="sendEstimatedQuote()" class="bg-terracotta hover:bg-terracotta-dark text-white font-bold py-3 px-5 rounded-xl text-sm transition shadow shrink-0 flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Lock in Quote Request
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section (DYNAMIC - NO FAKE REVIEWS) -->
+    <section id="reviews" class="py-16 sm:py-20 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-turquoise uppercase tracking-widest mb-2">Authentic Client Feedback</h2>
+                <h3 class="text-3xl font-extrabold text-slate-900">Client Reviews</h3>
+                <p class="text-slate-600 mt-2 text-sm">We value direct, transparent feedback. Read verified client submissions or leave your own review below.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                
+                <!-- Review Submission Form -->
+                <div class="lg:col-span-5 bg-sand-light p-6 rounded-2xl border border-sand-dark shadow-sm">
+                    <h4 class="text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-pen-to-square text-terracotta"></i> Leave a Review for Justin
+                    </h4>
+                    <p class="text-xs text-slate-600 mb-5">Have we recently completed work for you? Share your experience with the Albuquerque & East Mountains community.</p>
+
+                    <form id="review-form" onsubmit="handleReviewSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Your Name / Location</label>
+                            <input type="text" id="rev-name" required placeholder="e.g. Mark R. - Tijeras" class="w-full px-3.5 py-2 rounded-lg bg-white border border-slate-300 text-sm focus:ring-2 focus:ring-turquoise focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Service Performed</label>
+                            <input type="text" id="rev-service" required placeholder="e.g. Subfloor repair or Exterior Stairs" class="w-full px-3.5 py-2 rounded-lg bg-white border border-slate-300 text-sm focus:ring-2 focus:ring-turquoise focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Rating</label>
+                            <div class="flex items-center gap-2 text-amber-400 text-2xl" id="star-picker">
+                                <i class="fa-solid fa-star cursor-pointer" onclick="setRating(1)"></i>
+                                <i class="fa-solid fa-star cursor-pointer" onclick="setRating(2)"></i>
+                                <i class="fa-solid fa-star cursor-pointer" onclick="setRating(3)"></i>
+                                <i class="fa-solid fa-star cursor-pointer" onclick="setRating(4)"></i>
+                                <i class="fa-solid fa-star cursor-pointer" onclick="setRating(5)"></i>
+                            </div>
+                            <input type="hidden" id="rev-rating" value="5">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Your Feedback</label>
+                            <textarea id="rev-comment" rows="3" required placeholder="How was the communication, work quality, and cleanup?" class="w-full px-3.5 py-2 rounded-lg bg-white border border-slate-300 text-sm focus:ring-2 focus:ring-turquoise focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl text-sm transition shadow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-check"></i> Post Review
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Dynamic Reviews List -->
+                <div class="lg:col-span-7">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-bold text-slate-900">Recent Customer Comments</h4>
+                        <span id="review-count-badge" class="text-xs font-bold bg-turquoise/10 text-turquoise-dark px-3 py-1 rounded-full border border-turquoise/20">0 Reviews</span>
+                    </div>
+
+                    <div id="reviews-container" class="space-y-4">
+                        <!-- Rendered via JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer Section -->
+    <footer id="contact" class="bg-slate-900 text-white pt-16 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-12 border-b border-slate-800">
+                
+                <!-- Info Column -->
+                <div class="lg:col-span-6 space-y-5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-terracotta flex items-center justify-center text-white font-bold text-xl">
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-extrabold tracking-tight text-white block">High Desert</span>
+                            <span class="text-xs uppercase tracking-widest text-turquoise font-semibold block">Handyman Services</span>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-md">
+                        Owner & Handyman Justin provides dedicated repairs, custom finish woodwork, exterior stair maintenance, and subfloor prep across Albuquerque and the East Mountain communities.
+                    </p>
+
+                    <div class="space-y-3 text-sm pt-2">
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-terracotta shrink-0">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span><strong>Owner / Handyman:</strong> Justin</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-terracotta shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <a href="tel:5053634149" class="hover:text-turquoise transition font-semibold">(505) 363-4149</a>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-terracotta shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <a href="mailto:highdesertrepairs@gmail.com" class="hover:text-turquoise transition font-semibold text-turquoise-light">highdesertrepairs@gmail.com</a>
+                        </div>
+
+                        <div class="flex items-start gap-3 text-slate-300">
+                            <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-terracotta shrink-0 mt-0.5">
+                                <i class="fa-solid fa-map-pin"></i>
+                            </div>
+                            <span><strong>Primary Areas:</strong> Albuquerque, Tijeras, Edgewood, Cedar Crest, Sandia Park, Moriarty</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Direct Email Quick Contact Form -->
+                <div class="lg:col-span-6 bg-slate-850 p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl">
+                    <h4 class="text-xl font-bold text-white mb-2">Send Direct Job Request</h4>
+                    <p class="text-xs text-slate-400 mb-6">Submitting this form prepares a direct mail request to <strong class="text-sand">highdesertrepairs@gmail.com</strong>.</p>
+
+                    <form onsubmit="handleDirectContact(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs uppercase font-semibold text-slate-300 mb-1">Your Name</label>
+                                <input type="text" id="contact-name" required placeholder="Full Name" class="w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-turquoise">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-semibold text-slate-300 mb-1">Phone Number</label>
+                                <input type="tel" id="contact-phone" required placeholder="(505) 000-0000" class="w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-turquoise">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase font-semibold text-slate-300 mb-1">Town / Neighborhood</label>
+                            <input type="text" id="contact-town" required placeholder="e.g. Cedar Crest or NE Heights ABQ" class="w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-turquoise">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase font-semibold text-slate-300 mb-1">Project Details</label>
+                            <textarea id="contact-msg" rows="3" required placeholder="Describe what repairs or custom work you need..." class="w-full px-3.5 py-2.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-turquoise"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-terracotta hover:bg-terracotta-dark text-white font-bold py-3.5 rounded-xl text-sm transition shadow-lg flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Email Quote Request to Justin
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Disclaimer -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; High Desert Handyman Services. All rights reserved. Servicing Albuquerque & East Mountains.</p>
+                <p class="text-slate-500">NM Unlicensed Handyman Compliant • Small Repairs & Maintenance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // --- Mobile Menu Toggle ---
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Portfolio Tab Switching ---
+        function switchPortfolioTab(tabKey) {
+            document.querySelectorAll('.portfolio-tab').forEach(btn => {
+                btn.classList.remove('bg-terracotta', 'text-white');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            document.querySelectorAll('.portfolio-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            const activeBtn = document.getElementById(`tab-${tabKey}`);
+            const activeContent = document.getElementById(`content-${tabKey}`);
+            
+            if (activeBtn && activeContent) {
+                activeBtn.classList.remove('bg-slate-800', 'text-slate-300');
+                activeBtn.classList.add('bg-terracotta', 'text-white');
+                activeContent.classList.remove('hidden');
+            }
+        }
+
+        // --- Bathroom Multi-Stage Tab Controller ---
+        const bathStageData = {
+            'before': {
+                img: 'bathroom before.jpg',
+                desc: 'Stage 1: Initial inspection showing floor degradation and damage requiring teardown.'
+            },
+            'subfloor': {
+                img: 'bathroom recessed subfloor.jpg',
+                desc: 'Stage 2: Precision recessed subfloor joist preparation and level plywood floor deck rebuild.'
+            },
+            'waterproofing': {
+                img: 'bathroom waterproofing.jpg',
+                desc: 'Stage 3: Application of professional waterproofing membrane and cementitious tile backing board.'
+            },
+            'final': {
+                img: 'bathroom final.jpg',
+                desc: 'Stage 4: Clean finished surface tile preparation ready for customer tile finish.'
+            }
+        };
+
+        function setBathroomStage(stage) {
+            document.querySelectorAll('.bath-stage-btn').forEach(btn => {
+                btn.classList.remove('bg-terracotta', 'border-terracotta', 'text-white');
+                btn.classList.add('bg-slate-800', 'border-slate-700', 'text-slate-300');
+            });
+
+            const currentBtn = document.getElementById(`stage-btn-${stage}`);
+            if (currentBtn) {
+                currentBtn.classList.remove('bg-slate-800', 'border-slate-700', 'text-slate-300');
+                currentBtn.classList.add('bg-terracotta', 'border-terracotta', 'text-white');
+            }
+
+            const imgElem = document.getElementById('bath-display-img');
+            const descElem = document.getElementById('bath-stage-desc');
+
+            if (bathStageData[stage]) {
+                imgElem.src = bathStageData[stage].img;
+                descElem.innerText = bathStageData[stage].desc;
+            }
+        }
+
+        // --- Before/After Drag Slider Logic ---
+        function initComparisonSlider(containerId, beforeWrapId, handleId) {
+            const container = document.getElementById(containerId);
+            const beforeWrap = document.getElementById(beforeWrapId);
+            const handle = document.getElementById(handleId);
+
+            if (!container || !beforeWrap || !handle) return;
+
+            let isDragging = false;
+
+            function updateSliderPos(clientX) {
+                const rect = container.getBoundingClientRect();
+                let x = clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+
+                const percentage = (x / rect.width) * 100;
+                beforeWrap.style.width = percentage + '%';
+                handle.style.left = percentage + '%';
+            }
+
+            // Mouse events
+            handle.addEventListener('mousedown', () => isDragging = true);
+            window.addEventListener('mouseup', () => isDragging = false);
+            container.addEventListener('mousemove', (e) => {
+                if (isDragging) updateSliderPos(e.clientX);
+            });
+
+            // Touch events for mobile responsiveness
+            handle.addEventListener('touchstart', () => isDragging = true);
+            window.addEventListener('touchend', () => isDragging = false);
+            container.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches[0]) {
+                    updateSliderPos(e.touches[0].clientX);
+                }
+            });
+        }
+
+        // --- Estimate Calculator ---
+        function calculateEstimate() {
+            const type = document.getElementById('est-type').value;
+            const hours = parseInt(document.getElementById('est-hours').value);
+            const hoursValElem = document.getElementById('est-hours-val');
+            const totalElem = document.getElementById('est-total');
+
+            let ratePerHour = 65;
+            let baseFee = 50;
+
+            if (type === 'subfloor') ratePerHour = 75;
+            if (type === 'trim') ratePerHour = 70;
+            if (type === 'stairs') ratePerHour = 70;
+            if (type === 'commercial') ratePerHour = 80;
+
+            // Label text based on hours
+            if (hours <= 2) {
+                hoursValElem.innerText = `Quick Task (~${hours} hrs)`;
+            } else if (hours <= 5) {
+                hoursValElem.innerText = `Half-Day Scope (~${hours} hrs)`;
+            } else {
+                hoursValElem.innerText = `Full-Day / Multi-Step (~${hours} hrs)`;
+            }
+
+            const lowEst = baseFee + (hours * ratePerHour);
+            const highEst = Math.round(lowEst * 1.3);
+
+            totalElem.innerText = `$${lowEst} - $${highEst}`;
+        }
+
+        function sendEstimatedQuote() {
+            const typeText = document.getElementById('est-type').options[document.getElementById('est-type').selectedIndex].text;
+            const hours = document.getElementById('est-hours').value;
+            const estimate = document.getElementById('est-total').innerText;
+
+            const subject = encodeURIComponent(`Estimate Inquiry: ${typeText}`);
+            const body = encodeURIComponent(`Hi Justin,\n\nI used your website estimate tool and would like to discuss a project:\n\n- Service: ${typeText}\n- Estimated Time: ~${hours} hours\n- Calculated Ballpark: ${estimate}\n\nPlease contact me back!`);
+
+            window.location.href = `mailto:highdesertrepairs@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        // --- Star Rating Selection ---
+        let currentRating = 5;
+        function setRating(rating) {
+            currentRating = rating;
+            document.getElementById('rev-rating').value = rating;
+            const stars = document.querySelectorAll('#star-picker i');
+            stars.forEach((star, idx) => {
+                if (idx < rating) {
+                    star.className = 'fa-solid fa-star cursor-pointer text-amber-400';
+                } else {
+                    star.className = 'fa-regular fa-star cursor-pointer text-slate-300';
+                }
+            });
+        }
+
+        // --- Review LocalStorage Logic ---
+        function getSavedReviews() {
+            const stored = localStorage.getItem('hd_handyman_reviews');
+            if (stored) {
+                try { return JSON.parse(stored); } catch (e) { return []; }
+            }
+            return [];
+        }
+
+        function renderReviews() {
+            const reviews = getSavedReviews();
+            const container = document.getElementById('reviews-container');
+            const badge = document.getElementById('review-count-badge');
+
+            badge.innerText = `${reviews.length} Client ${reviews.length === 1 ? 'Review' : 'Reviews'}`;
+
+            if (reviews.length === 0) {
+                container.innerHTML = `
+                    <div class="p-8 text-center bg-slate-50 border border-dashed border-slate-300 rounded-xl">
+                        <i class="fa-solid fa-comments text-3xl text-slate-300 mb-2"></i>
+                        <p class="text-sm font-semibold text-slate-600">No client reviews submitted yet.</p>
+                        <p class="text-xs text-slate-400 mt-1">Be the first to post your feedback using the form on the left!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = reviews.map(rev => {
+                const starIcons = Array.from({length: 5}, (_, i) => 
+                    `<i class="fa-${i < rev.rating ? 'solid' : 'regular'} fa-star text-amber-400 text-xs"></i>`
+                ).join('');
+
+                return `
+                    <div class="bg-sand-light/50 p-5 rounded-xl border border-sand-dark/60 shadow-sm space-y-2">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h5 class="font-bold text-slate-900 text-sm">${escapeHtml(rev.name)}</h5>
+                                <span class="text-xs text-turquoise-dark font-medium">${escapeHtml(rev.service)}</span>
+                            </div>
+                            <div class="flex gap-1">${starIcons}</div>
+                        </div>
+                        <p class="text-xs text-slate-600 italic">"${escapeHtml(rev.comment)}"</p>
+                        <span class="text-[10px] text-slate-400 block text-right">${rev.date}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function handleReviewSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('rev-name').value.trim();
+            const service = document.getElementById('rev-service').value.trim();
+            const comment = document.getElementById('rev-comment').value.trim();
+            const rating = parseInt(document.getElementById('rev-rating').value) || 5;
+
+            if (!name || !service || !comment) return;
+
+            const newReview = {
+                name,
+                service,
+                comment,
+                rating,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+            };
+
+            const reviews = getSavedReviews();
+            reviews.unshift(newReview);
+            localStorage.setItem('hd_handyman_reviews', JSON.stringify(reviews));
+
+            document.getElementById('review-form').reset();
+            setRating(5);
+            renderReviews();
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+            });
+        }
+
+        // --- Direct Contact Form Mailto Action ---
+        function handleDirectContact(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone').value;
+            const town = document.getElementById('contact-town').value;
+            const msg = document.getElementById('contact-msg').value;
+
+            const subject = encodeURIComponent(`Handyman Quote Request: ${name} (${town})`);
+            const body = encodeURIComponent(`Hi Justin,\n\nI would like to request handyman services for my location:\n\n- Name: ${name}\n- Phone: ${phone}\n- Town/Area: ${town}\n\nProject Description:\n${msg}\n\nThank you!`);
+
+            window.location.href = `mailto:highdesertrepairs@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        // --- Window Onload Initialization ---
+        window.onload = function() {
+            initComparisonSlider('bar-slider', 'bar-before-wrap', 'bar-handle');
+            initComparisonSlider('stairs-slider', 'stairs-before-wrap', 'stairs-handle');
+            calculateEstimate();
+            renderReviews();
+        };
+    </script>
+</body>
+</html>
