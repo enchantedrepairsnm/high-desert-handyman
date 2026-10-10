@@ -97,7 +97,7 @@
                 Quality home maintenance, custom wood accents, tile repairs, and light commercial repairs owned and operated by <strong class="font-semibold text-amber-300">Justin</strong>.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=totbhandyservices@gmail.com" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-3">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=justin@highdeserthandyman.fyi" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-3">
                     <i class="fas fa-envelope text-lg"></i> Email via Gmail
                 </a>
                 <a href="tel:5053634149" class="w-full sm:w-auto px-8 py-4 bg-slate-900/80 hover:bg-slate-900 text-white font-bold rounded-xl border border-white/20 backdrop-blur-md transition-all flex items-center justify-center gap-3">
@@ -348,7 +348,7 @@
                 </div>
 
                 <div class="mt-6 text-center">
-                    <a id="est-gmail-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=totbhandyservices@gmail.com&su=Quote%20Inquiry%20from%20Website" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold rounded-xl shadow transition-all text-sm">
+                    <a id="est-gmail-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=justin@highdeserthandyman.fyi&su=Quote%20Inquiry%20from%20Website" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold rounded-xl shadow transition-all text-sm">
                         <i class="fas fa-paper-plane"></i> Request Final Quote via Gmail
                     </a>
                 </div>
@@ -442,13 +442,13 @@
                             </div>
                         </a>
 
-                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=totbhandyservices@gmail.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/80 border border-slate-700 hover:border-amber-400 transition-all group">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=justin@highdeserthandyman.fyi" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/80 border border-slate-700 hover:border-amber-400 transition-all group">
                             <div class="w-12 h-12 rounded-lg bg-amber-500 flex items-center justify-center text-xl text-slate-950">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
                                 <span class="text-xs text-slate-400 block uppercase font-bold">Direct Email</span>
-                                <span class="text-base font-bold text-white group-hover:text-amber-300">totbhandyservices@gmail.com</span>
+                                <span class="text-base font-bold text-white group-hover:text-amber-300">justin@highdeserthandyman.fyi</span>
                             </div>
                         </a>
 
@@ -606,58 +606,4 @@
                             <p class="text-slate-700 text-sm mb-4 leading-relaxed">"${escapeHtml(rev.text)}"</p>
                         </div>
                         <div class="border-t border-slate-100 pt-3 mt-auto">
-                            <span class="font-bold text-slate-900 text-sm block">${escapeHtml(rev.name)}</span>
-                            <span class="text-xs text-slate-500 block">${escapeHtml(rev.location)}</span>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            }
-        }
-
-        function handleReviewSubmission(e) {
-            e.preventDefault();
-            const name = document.getElementById('rev-name').value.trim();
-            const location = document.getElementById('rev-location').value.trim();
-            const rating = parseInt(document.getElementById('rev-rating').value);
-            const text = document.getElementById('rev-text').value.trim();
-
-            if (!name || !text) return;
-
-            const newRev = {
-                name,
-                location,
-                rating,
-                text,
-                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-            };
-
-            savedReviews.unshift(newRev);
-            localStorage.setItem('hd_reviews_data', JSON.stringify(savedReviews));
-            document.getElementById('reviewForm').reset();
-            renderReviews();
-            alert('Thank you! Your review has been published.');
-        }
-
-        function handleQuickContact(e) {
-            e.preventDefault();
-            const name = document.getElementById('qc-name').value;
-            const contact = document.getElementById('qc-contact').value;
-            const details = document.getElementById('qc-details').value;
-
-            const subject = encodeURIComponent(`Project Request from ${name}`);
-            const body = encodeURIComponent(`Name: ${name}\nContact: ${contact}\n\nDetails:\n${details}`);
-
-            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=totbhandyservices@gmail.com&su=${subject}&body=${body}`, '_blank');
-        }
-
-        function escapeHtml(text) {
-            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderReviews();
-        });
-    </script>
-</body>
-</html>
+                            <span class="font-bold text-slate-900 text-sm block">${escapeHtml(rev
