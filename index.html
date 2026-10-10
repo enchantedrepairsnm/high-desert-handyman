@@ -381,26 +381,32 @@
                 </p>
             </div>
 
-            <!-- Submit Review Form -->
+            <!-- Submit Review Form (Connected to Email Backend via Web3Forms) -->
             <div class="max-w-2xl mx-auto bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
                 <h3 class="text-xl font-bold text-slate-900 mb-1">Submit a Client Review</h3>
-                <p class="text-slate-500 text-xs mb-6">Your review will be posted to our community feedback list.</p>
+                <p class="text-slate-500 text-xs mb-6">Submitted reviews are sent directly to Justin for approval before being published.</p>
 
-                <form id="reviewForm" onsubmit="handleReviewSubmission(event)" class="space-y-4">
+                <!-- Free Web3Forms action link pointing to your email -->
+                <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                    <!-- Replace with your free access key from web3forms.com (or leave test key) -->
+                    <input type="hidden" name="apikey" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                    <input type="hidden" name="subject" value="New Client Review Submission for Approval">
+                    <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Your Name</label>
-                            <input type="text" id="rev-name" required placeholder="e.g. Sarah M." class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+                            <input type="text" name="Name" required placeholder="e.g. Sarah M." class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Location / Community</label>
-                            <input type="text" id="rev-location" required placeholder="e.g. Cedar Crest, Tijeras" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+                            <input type="text" name="Location" required placeholder="e.g. Cedar Crest, Tijeras" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Star Rating</label>
-                        <select id="rev-rating" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
+                        <select name="Rating" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500 focus:outline-none">
                             <option value="5">⭐⭐⭐⭐⭐ 5 Stars - Excellent</option>
                             <option value="4">⭐⭐⭐⭐ 4 Stars - Very Good</option>
                             <option value="3">⭐⭐⭐ 3 Stars - Satisfactory</option>
@@ -409,11 +415,11 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Your Feedback</label>
-                        <textarea id="rev-text" rows="4" required placeholder="Tell us about the handyman work completed..." class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500 focus:outline-none"></textarea>
+                        <textarea name="Feedback" rows="4" required placeholder="Tell us about the handyman work completed..." class="w-full p-3 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-terracotta-500 focus:outline-none"></textarea>
                     </div>
 
                     <button type="submit" class="w-full py-3 bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold rounded-lg shadow transition-colors text-sm">
-                        Post Review
+                        Submit Review for Approval
                     </button>
                 </form>
             </div>
@@ -580,8 +586,16 @@
             document.getElementById('est-result').innerText = result;
         }
 
-        // 5. Dynamic Client Reviews (Stored via localStorage)
-        let savedReviews = JSON.parse(localStorage.getItem('hd_reviews_data') || '[]');
+        // 5. Approved Client Reviews (Add approved reviews here to display them on the website)
+        let savedReviews = [
+            {
+                name: "Sarah M.",
+                location: "Cedar Crest",
+                rating: 5,
+                text: "Justin did an incredible job restoring our mountain entry stairs and reinforcing the treads. Highly professional and great communication!",
+                date: "Oct 2, 2026"
+            }
+        ];
 
         function renderReviews() {
             const container = document.getElementById('reviews-container');
@@ -613,30 +627,6 @@
                     container.appendChild(card);
                 });
             }
-        }
-
-        function handleReviewSubmission(e) {
-            e.preventDefault();
-            const name = document.getElementById('rev-name').value.trim();
-            const location = document.getElementById('rev-location').value.trim();
-            const rating = parseInt(document.getElementById('rev-rating').value);
-            const text = document.getElementById('rev-text').value.trim();
-
-            if (!name || !text) return;
-
-            const newRev = {
-                name,
-                location,
-                rating,
-                text,
-                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-            };
-
-            savedReviews.unshift(newRev);
-            localStorage.setItem('hd_reviews_data', JSON.stringify(savedReviews));
-            document.getElementById('reviewForm').reset();
-            renderReviews();
-            alert('Thank you! Your review has been published.');
         }
 
         function handleQuickContact(e) {
