@@ -97,7 +97,7 @@
                 Quality home maintenance, custom wood accents, tile repairs, and light commercial repairs owned and operated by <strong class="font-semibold text-amber-300">Justin</strong>.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="mailto:justin@highdeserthandyman.fyi?subject=Website%20Inquiry" class="w-full sm:w-auto px-8 py-4 bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-3">
+                <a href="mailto:justin@highdeserthandyman.fyi?subject=Website%20Inquiry" onclick="handleEmailClick(event, 'justin@highdeserthandyman.fyi', 'Website Inquiry')" class="w-full sm:w-auto px-8 py-4 bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-3 cursor-pointer">
                     <i class="fas fa-envelope text-lg"></i> Send Email
                 </a>
                 <a href="tel:5053634149" class="w-full sm:w-auto px-8 py-4 bg-slate-900/80 hover:bg-slate-900 text-white font-bold rounded-xl border border-white/20 backdrop-blur-md transition-all flex items-center justify-center gap-3">
@@ -348,7 +348,7 @@
                 </div>
 
                 <div class="mt-6 text-center">
-                    <a id="est-gmail-btn" href="mailto:justin@highdeserthandyman.fyi?subject=Quote%20Inquiry%20from%20Website" class="inline-flex items-center gap-2 px-6 py-3 bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold rounded-xl shadow transition-all text-sm">
+                    <a id="est-gmail-btn" href="mailto:justin@highdeserthandyman.fyi?subject=Quote%20Inquiry" onclick="handleEmailClick(event, 'justin@highdeserthandyman.fyi', 'Quote Inquiry')" class="inline-flex items-center gap-2 px-6 py-3 bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold rounded-xl shadow transition-all text-sm cursor-pointer">
                         <i class="fas fa-paper-plane"></i> Request Final Quote via Email
                     </a>
                 </div>
@@ -442,7 +442,7 @@
                             </div>
                         </a>
 
-                        <a href="mailto:justin@highdeserthandyman.fyi" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/80 border border-slate-700 hover:border-amber-400 transition-all group">
+                        <a href="mailto:justin@highdeserthandyman.fyi" onclick="handleEmailClick(event, 'justin@highdeserthandyman.fyi', 'Direct Inquiry')" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/80 border border-slate-700 hover:border-amber-400 transition-all group cursor-pointer">
                             <div class="w-12 h-12 rounded-lg bg-amber-500 flex items-center justify-center text-xl text-slate-950">
                                 <i class="fas fa-envelope"></i>
                             </div>
@@ -580,7 +580,25 @@
             document.getElementById('est-result').innerText = result;
         }
 
-        // 5. Dynamic Client Reviews (Stored via localStorage)
+        // 5. Smart Email Fallback Handler (Tries mailto:, falls back to Gmail web compose)
+        function handleEmailClick(e, email, subject) {
+            e.preventDefault();
+            const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}`;
+
+            // Try opening mailto client
+            window.location.href = mailtoUrl;
+
+            // If the user's device doesn't trigger a mail client within 400ms, open Gmail web compose as a fallback
+            setTimeout(() => {
+                // Only opens if the page is still visible (meaning mailto didn't successfully navigate away)
+                if (!document.hidden) {
+                    window.open(gmailUrl, '_blank');
+                }
+            }, 400);
+        }
+
+        // 6. Dynamic Client Reviews (Stored via localStorage)
         let savedReviews = JSON.parse(localStorage.getItem('hd_reviews_data') || '[]');
 
         function renderReviews() {
@@ -648,8 +666,16 @@
             const subject = encodeURIComponent(`Project Request from ${name}`);
             const body = encodeURIComponent(`Name: ${name}\nContact: ${contact}\n\nDetails:\n${details}`);
 
-            // Opens native mail app cleanly on both desktop and mobile devices
-            window.location.href = `mailto:justin@highdeserthandyman.fyi?subject=${subject}&body=${body}`;
+            const mailtoUrl = `mailto:justin@highdeserthandyman.fyi?subject=${subject}&body=${body}`;
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=justin@highdeserthandyman.fyi&su=${subject}&body=${body}`;
+
+            window.location.href = mailtoUrl;
+
+            setTimeout(() => {
+                if (!document.hidden) {
+                    window.open(gmailUrl, '_blank');
+                }
+            }, 400);
         }
 
         function escapeHtml(text) {
